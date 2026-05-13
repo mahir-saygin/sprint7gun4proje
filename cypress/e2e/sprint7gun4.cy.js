@@ -1,4 +1,31 @@
 describe('describe E2E testing', () => {
+
+it('form submit test', () => {
+    cy.visit('http://localhost:5173/')
+
+    cy.get('[data-cy="input-email"]').type("erdem.guntay@wit.com.tr");
+    cy.get('[data-cy="input-password"]').type("9fxIH0GXesEwH_I");
+   
+    cy.get('[data-cy="input-terms"]').check();
+    cy.get('[data-cy="input-button"]').click();
+
+    //cy.get('[class="invalid-feedback"]').should('have.length', '0');
+    //cy.get('[data-cy="input-button"]').should('be.disabled');
+  });
+
+  it('form submit test 2', () => {
+    cy.visit('http://localhost:5173/')
+
+    cy.get('[data-cy="input-email"]').type("erdem.guntay@wit.com.tr");
+    cy.get('[data-cy="input-password"]').type("9fxIH0GXesEwH_I ");
+   
+    cy.get('[data-cy="input-terms"]').check();
+    cy.get('[data-cy="input-button"]').click();
+    cy.contains("Giriş başarili");
+    //cy.get('[class="invalid-feedback"]').should('have.length', '0');
+    //cy.get('[data-cy="input-button"]').should('be.disabled');
+  });
+
   it('wrong email test', () => {
     cy.visit('http://localhost:5173/')
 

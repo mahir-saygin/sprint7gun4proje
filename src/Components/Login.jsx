@@ -84,23 +84,33 @@ export default function Login() {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    if (isValid) {
-      axios
-        .get('https://6540a96145bedb25bfc247b4.mockapi.io/api/login')
-        .then((res) => {
-          const user = res.data.find(
-            (item) => item.password == form.password && item.email == form.email
-          );
-          if (user) {
-            setForm(initialForm);
-            history.push('/success');
-          } else {
-            history.push('/error');
-          }
-        });
-    }
-  };
+  event.preventDefault();
+
+  if (isValid) {
+    axios
+      .get('https://6540a96145bedb25bfc247b4.mockapi.io/api/login')
+      .then((res) => {
+
+        console.log("FORM:", form);
+        console.log("API:", res.data);
+
+        const user = res.data.find(
+          (item) =>
+            item.password === form.password &&
+            item.email === form.email
+        );
+
+        console.log("FOUND USER:", user);
+
+        if (user) {
+          setForm(initialForm);
+          history.push('/success');
+        } else {
+          history.push('/error');
+        }
+      });
+  }
+};
 
   return (
     <Form onSubmit={handleSubmit}>
